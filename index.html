@@ -4,73 +4,557 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FoxDavoid</title>
-	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="full-web-space">
-				<aside class="full-profile-space">
-		    	<div class="profile-space">
-						<div class="profile-container">
-							<div class="profile-banner-container">
-								<img src="zero_one.webp" alt="" class="profile-banner">
-							</div>
-							<div class="profile-nobanner">
-								<div class="profile-nobanner-container">
-									<div class="profile-info-container">
-										<div class="profile-info">
-											<h3 class="profile-name">Fox David</h3>
-											<p class="profile-username">@foxdavoid</p>
-											<div class="profile-status-bg">
-												<p class="profile-status-text">Making stupid stuff since I'm 7.</p>
-											</div>
-										</div>
-										<div class="profile-pfp-div">
-											<img src="Miku.png" alt="" class="profile-pfp">
-										</div>
-									</div>
-									<div class="empty-space">
-										<div class="empty-space-text-container">
-											<h4 class="empty-space-text-1">I don't exactly know what to put in here yet, bro, sowwwy</h4>
-											<p class="empty-space-text-2">Ignore the square; this is just a funny canvas. Actually, ignore all you see in this section, cuz it will be redisigned or something.</p>
-										</div>
-									</div>
-									<div class="subscribe-button">
-										<a href="#" class="subscribe-text">Subscribe</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="instant-email-space">
-							<div class="instant-email-container">
-								<h6 class="instant-email-text">Send me an instant email (in case you want to, ofc)</h6>
-								<!-- <form action="https://formsubmit.co/your@email.com" method="POST">
-									<input type="text" name="name" placeholder="Your name" required>
-									<input type="email" name="email" placeholder="Your email" required>
-									<textarea name="message" placeholder="Your message" required></textarea>
-									<button type="submit">Send</button>
-								</form> -->
-							</div>
-						</div>
-					</div>
-				</div>
-			</aside>
-			<section class="web-space">
-				<div class="newsletter-container">
-					<article>
-							<div class="newsletter-content">
-									<div class="newsletter-image">
-											<img src="MikuNewsletter.webp" alt="thumbnail">
-											<span class="date-label">12/32/25</span>
-									</div>
-									<div class="newsletter-info">
-											<h3 class="newsletter-title">A birth-day (hell, I'm so funny)</h3>
-											<p class="newsletter-description">On my birthday, this personal webpage has been born. This looks <b>PRETTY</b> messy, but this very first version was made within 20 minutes before heading the bed as I forgot it was my birthday in the first place, hahaahaha.</p>
-									</div>
-							</div>
-					</article>
-			</div>
-			</section>
-			
+  <div class="page-container">
+    <div class="main-content">
+      <div class="hero-container mobile-only" style="text-align: center;">
+        <h1 class="hero-title">FOXDAVOID</h1>
+        <p class="hero-second-text">It's pronounced "day-void"</p>
+      </div>
+
+      <aside class="full-profile-space">
+        <div class="profile-container">
+          <div class="profile-banner-container">
+            <img src="Banner.webp" alt="" class="profile-banner">
+          </div>
+          <div class="profile-content">
+            <div class="profile-info-container">
+              <div class="profile-info">
+                <h3 class="profile-name">Fox David</h3>
+                <p class="profile-username">@foxdavoid</p>
+              </div>
+              <div class="profile-pfp-div">
+                <img src="Miku.png" alt="" class="profile-pfp">
+              </div>
+            </div>
+            <div class="empty-space">
+              <div class="empty-space-text-container">
+                <h4 class="empty-space-text-1">I don't exactly know what to put in here yet, bro, sowwwy</h4>
+                <p class="empty-space-text-2">Ignore the square; this is just a funny canvas. Actually, ignore all you see in this section, cuz it will be redisigned or something.</p>
+              </div>
+            </div>
+            <div class="profile-buttons">
+              <a href="#message-modal" class="profile-button message-btn">
+                <span class="profile-btn-text" id="MessageAnn">Message</span>
+              </a>
+              <a href="#" class="profile-button subscribe-btn">
+                <span class="profile-btn-text" id="SubscribeAnn">Subscribe (nope)</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <div class="web-space">
+        <section class="section">
+        <section class="hero-container desktop-only">
+          <h1 class="hero-title">FOXDAVOID</h1>
+          <p class="hero-second-text">It's pronounced "day-void"</p>
+        </section>
+
+
+          <div class="section-insides">
+            <section class="newsletter-section">
+              <h2>Newsletters</h2>
+              <div class="content-grid">
+                <article class="content-card">
+                  <a href="#modal-1">
+                    <div class="newsletter-content">
+                      <div class="content-image">
+                        <img src="NewsletterTemplate.webp" alt="thumbnail">
+                        <span class="date-label">12/32/25</span>
+                      </div>
+                      <div class="content-info">
+                        <h3 class="content-title">A birth-day (hell, I'm so funny)</h3>
+                        <p class="content-description">Hi, everyone, I made this painting before xmas and I really like how it turns out. It feels like a calm blue sky and ocean drop.</p>
+                      </div>
+                    </div>
+                  </a>
+                </article>
+              </div>
+            </section>
+    
+            <section class="blog-section scroll-effect-section">
+              <h2>Blog</h2>
+              <div class="content-grid">
+                <article class="content-card">
+                  <a href="#blog-1">
+                    <div class="newsletter-content">
+                      <div class="content-image">
+                        <img src="NewsletterTemplate.webp" alt="thumbnail">
+                        <span class="date-label">12/32/25</span>
+                      </div>
+                      <div class="content-info">
+                        <h3 class="content-title">Title for... a blog</h3>
+                      </div>
+                    </div>
+                  </a>
+                </article>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-insides">
+            <section class="feed-section">
+              <h2>Feed</h2>
+              <div class="content-grid">
+                <article class="content-card">
+                  <div class="feed-content">
+                    <div class="content-image">
+                      <img src="NewsletterTemplate.webp" alt="thumbnail">
+                      <span class="date-label">12/32/25</span>
+                    </div>
+                    <div class="content-info">
+                      <p class="content-description">On my birthday, this personal webpage has been born.</p>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </section>
+    
+            <section class="changelog-section scroll-effect-section">
+              <h2>Changelogs</h2>
+              <div class="content-grid">
+                <article class="content-card">
+                  <div class="changelog-content">
+                    <div class="content-image">
+                      <img src="NewsletterTemplate.webp" alt="thumbnail">
+                      <span class="date-label">12/32/25</span>
+                    </div>
+                    <div class="content-info">
+                      <h3 class="content-title">New Feature Added</h3>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-insides">
+            <section class="moderating-section scroll-effect-section">
+              <h2>Currently Moderating</h2>
+              <div class="content-grid">
+                <article class="content-card">
+                  <div class="moderating-content">
+                    <div class="moderating-image">
+                      <img src="TLTRedditBanner.webp" alt="thumbnail">
+                    </div>
+                    <div class="moderating-info">
+                      <div class="moderating-info-n-pfp">
+                        <div class="moderating-info-n-pfp-info">
+                          <div class="verified">
+                            <img src="Verified.webp" alt="" class="verified-icon">
+                            <p class="verified-text">Official</p>
+                          </div>
+                          <h3 class="moderating-name">r/TheLivingTombstone</h3>
+                          <p class="moderating-members">4K Members</p>
+                        </div>
+                        <div class="moderating-info-n-pfp-img">
+                          <div class="community-pfp-container">
+                            <img src="TLTRedditIcon.webp" alt="">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="moderating-description-container">
+                        <p class="moderating-description">Official Subreddit for The Living Tombstone, my favorite music band.</p>
+                        <a href="https://www.reddit.com/r/TheLivingTombstone/" class="moderating-join-btn" target="_blank">
+                          <img src="RedditIcon.webp" alt="" class="reddit-icon">
+                          <p class="moderating-join-btn-text">Join</p>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+                
+                <article class="content-card">
+                  <div class="moderating-content">
+                    <div class="moderating-image">
+                      <img src="TLTDiscordBanner.webp" alt="thumbnail">
+                    </div>
+                    <div class="moderating-info">
+                      <div class="moderating-info-n-pfp">
+                        <div class="moderating-info-n-pfp-info">
+                          <div class="verified">
+                            <img src="Verified.webp" alt="" class="verified-icon">
+                            <p class="verified-text">Official</p>
+                          </div>
+                          <h3 class="moderating-name">The Living Tombstone</h3>
+                          <p class="moderating-members">13K Members</p>
+                        </div>
+                        <div class="moderating-info-n-pfp-img">
+                          <div class="community-pfp-container">
+                            <img src="TLTDiscordIcon.webp" alt="">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="moderating-description-container">
+                        <p class="moderating-description">Official Discord server for The Living Tombstone, my favorite music band.</p>
+                        <a href="https://discord.gg/EDvNaEXbxH" class="moderating-join-btn" target="_blank" rel="noopener noreferrer" aria-label="Join The Living Tombstone Discord server" title="Join The Living Tombstone Discord server">
+                          <img src="DiscordIcon.webp" alt="" class="discord-icon">
+                          <p class="moderating-join-btn-text">Join</p>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+                
+                <article class="content-card">
+                  <div class="moderating-content">
+                    <div class="moderating-image">
+                      <img src="evelinaDiscordBanner.webp" alt="thumbnail">
+                    </div>
+                    <div class="moderating-info">
+                      <div class="moderating-info-n-pfp">
+                        <div class="moderating-info-n-pfp-info">
+                          <div class="verified">
+                            <img src="Verified.webp" alt="" class="verified-icon">
+                            <p class="verified-text">Official</p>
+                          </div>
+                          <h3 class="moderating-name">evelina</h3>
+                          <p class="moderating-members">1K Members</p>
+                        </div>
+                        <div class="moderating-info-n-pfp-img">
+                          <div class="community-pfp-container">
+                            <img src="evelinaDiscordIcon.webp" alt="">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="moderating-description-container">
+                        <p class="moderating-description">All-in-one Discord app serving 2,000,000+ across 12,000+ servers.</p>
+                        <a href="https://discord.gg/Xc5FwZJKuH" class="moderating-join-btn" target="_blank" rel="noopener noreferrer" aria-label="Join Evelina Discord server" title="Join Evelina Discord server">
+                          <img src="DiscordIcon.webp" alt="" class="discord-icon">
+                          <p class="moderating-join-btn-text">Join</p>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </section>
+    
+            <section class="tool-stuff-section scroll-effect-section">
+              <h2>Some stuff I'll tell you I use</h2>
+              <div class="content-grid">
+                <article class="content-card">
+                  <div class="tool-stuff-content">
+                    <div class="content-image">
+                      <img src="LinuxSS2.webp" alt="thumbnail">
+                    </div>
+                    <div class="tool-stuff-info-n-icon">
+                      <div class="tool-stuff-info">
+                        <div class="tool-stuff-info-n-description">
+                          <h3 class="content-title">Linux</h3>
+                          <p class="content-description">My favorite operative system.</p>
+                        </div>
+                        <a href="https://www.linux.org/pages/download/" class="tool-stuff-interesting-btn" target="_blank" rel="noopener noreferrer" aria-label="Download Linux" title="Download Linux">Hmm, interesting...</a>
+                      </div>
+                      <div class="tool-stuff-icon-container">
+                        <img src="LinuxIcon.webp" alt="">
+                      </div>
+                    </div>
+                  </div>
+                </article>
+                
+                <article class="content-card">
+                  <div class="tool-stuff-content">
+                    <div class="content-image">
+                      <img src="ObsidianSS2.webp" alt="thumbnail">
+                    </div>
+                    <div class="tool-stuff-info-n-icon">
+                      <div class="tool-stuff-info">
+                        <div class="tool-stuff-info-n-description">
+                          <h3 class="content-title">Obsidian</h3>
+                          <p class="content-description">My note-taking application.</p>
+                        </div>
+                        <a href="https://obsidian.md/" class="tool-stuff-interesting-btn" target="_blank" rel="noopener noreferrer" aria-label="Download Obsidian" title="Download Obsidian">Hmm, interesting...</a>
+                      </div>
+                      <div class="tool-stuff-icon-container">
+                        <img src="ObsidianIcon.webp" alt="">
+                      </div>
+                    </div>
+                  </div>
+                </article>
+                
+                <article class="content-card">
+                  <div class="tool-stuff-content">
+                    <div class="content-image">
+                      <img src="VivaldiSS2.webp" alt="thumbnail">
+                    </div>
+                    <div class="tool-stuff-info-n-icon">
+                      <div class="tool-stuff-info">
+                        <div class="tool-stuff-info-n-description">
+                          <h3 class="content-title">Vivaldi</h3>
+                          <p class="content-description">My prefered Internet browser.</p>
+                        </div>
+                        <a href="https://vivaldi.com/" class="tool-stuff-interesting-btn" target="_blank" rel="noopener noreferrer" aria-label="Download Vivaldi" title="Download Vivaldi">Hmm, interesting...</a>
+                      </div>
+                      <div class="tool-stuff-icon-container">
+                        <img src="VivaldiIcon.webp" alt="">
+                      </div>
+                    </div>
+                  </div>
+                </article>
+                
+                <article class="content-card">
+                  <div class="tool-stuff-content">
+                    <div class="content-image">
+                      <img src="FLStudioSS2.webp" alt="thumbnail">
+                    </div>
+                    <div class="tool-stuff-info-n-icon">
+                      <div class="tool-stuff-info">
+                        <div class="tool-stuff-info-n-description">
+                          <h3 class="content-title">FL Studio</h3>
+                          <p class="content-description">My DAW for music production.</p>
+                        </div>
+                        <a href="https://www.image-line.com/flstudio/" class="tool-stuff-interesting-btn" target="_blank" rel="noopener noreferrer" aria-label="Download FL Studio" title="Download FL Studio">Hmm, interesting...</a>
+                      </div>
+                      <div class="tool-stuff-icon-container">
+                        <img src="FLStudioIcon.webp" alt="">
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-insides">
+            <section class="book-reading-section scroll-effect-section">
+                <h2>Books I recently just read</h2>
+                <div class="book-reading-section-content">
+                    <div class="content-grid">
+                      <article class="content-card book-card">
+                        <div class="book-cover">
+                          <img src="Book_MinecraftTI.webp" alt="ghostgirl" class="book-cover-img">
+                        </div>
+                        <div class="book-info">
+                          <h3 class="book-title">Minecraft: The Island</h3>
+                          <p class="book-author">Max Brooks</p>
+                        </div>
+                      </article>
+                      <article class="content-card book-card">
+                        <div class="book-cover">
+                          <img src="Book_Ghostgirl5.webp" alt="ghostgirl" class="book-cover-img">
+                        </div>
+                        <div class="book-info">
+                          <h3 class="book-title">ghostgirl: Día de Muertos</h3>
+                          <p class="book-author">Tonya Hurley</p>
+                        </div>
+                      </article>
+                      <article class="content-card book-card">
+                        <div class="book-cover">
+                          <img src="Book_Ghostgirl4.webp" alt="ghostgirl" class="book-cover-img">
+                        </div>
+                        <div class="book-info">
+                          <h3 class="book-title">ghostgirl: Xmas Spirit</h3>
+                          <p class="book-author">Tonya Hurley</p>
+                        </div>
+                      </article>
+                      <article class="content-card book-card">
+                        <div class="book-cover">
+                          <img src="Book_Ghostgirl3.webp" alt="ghostgirl" class="book-cover-img">
+                        </div>
+                        <div class="book-info">
+                          <h3 class="book-title">ghostgirl: Lovesick</h3>
+                          <p class="book-author">Tonya Hurley</p>
+                        </div>
+                      </article>
+                      <article class="content-card book-card">
+                        <div class="book-cover">
+                          <img src="Book_Ghostgirl2.webp" alt="ghostgirl" class="book-cover-img">
+                        </div>
+                        <div class="book-info">
+                          <h3 class="book-title">ghostgirl: Homecoming</h3>
+                          <p class="book-author">Tonya Hurley</p>
+                        </div>
+                      </article>
+                      <article class="content-card book-card">
+                        <div class="book-cover">
+                          <img src="Book_Ghostgirl.webp" alt="ghostgirl" class="book-cover-img">
+                        </div>
+                        <div class="book-info">
+                          <h3 class="book-title">ghostgirl</h3>
+                          <p class="book-author">Tonya Hurley</p>
+                        </div>
+                      </article>
+                    </div>
+                </div>
+            </section>
+    
+            <section class="languages-section scroll-effect-section">
+              <h2>Other languages I could read as well and/or I'm trying to learn</h2>
+              <div class="content-grid">
+                <article class="content-card">
+                  <div class="languages-content">
+                    <div class="language-info-no-source">
+                      <div class="what-language">
+                        <img src="FlagMexico.webp" alt="flag" class="language-flag">
+                        <h3 class="languages-language-name">Spanish</h3>
+                      </div>
+                      <div class="languages-info">
+                        <div class="paragraph-section">
+                          <h3 class="languages-title">Most complex text I can read:</h3>
+                          <p class="languages-description">El cambio climático exige una cooperación internacional sin precedentes. A pesar de los acuerdos firmados, las emisiones siguen aumentando. Urgen medidas drásticas que, aunque impopulares, son indispensables.</p>
+                        </div>
+                        <div class="paragraph-section">
+                          <h3 class="languages-title">One of these words confuses me:</h3>
+                          <p class="languages-description">El cambio climático antropocéntrico demanda un giro paradigmático. Conceptos como 'desarrollo sostenible' resultan insuficientes; necesitamos una ética ecológica radical que priorice el bienestar planetario sobre el crecimiento económico ilimitado.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="language-info-source">
+                      <img src="BusuuIcon.webp" alt="Busuu" class="language-source">
+                      <img src="DuolingoIcon.webp" alt="Duolingo" class="language-source">
+                      <img src="LinQIcon.webp" alt="LinQ" class="language-source">
+                      <img src="SizzleIcon.webp" alt="Sizzle" class="language-source">
+                    </div>
+                  </div>
+                </article>
+                
+                <article class="content-card">
+                  <div class="languages-content">
+                    <div class="language-info-no-source">
+                      <div class="what-language">
+                        <img src="FlagFrance.webp" alt="flag" class="language-flag">
+                        <h3 class="languages-language-name">French</h3>
+                      </div>
+                      <div class="languages-info">
+                        <div class="paragraph-section">
+                          <h3 class="languages-title">Most complex text I can read:</h3>
+                          <p class="languages-description">Bonjour. Je m'appelle Claire. J'ai un chat.</p>
+                        </div>
+                        <div class="paragraph-section">
+                          <h3 class="languages-title">One of these words confuses me:</h3>
+                          <p class="languages-description">J'habite dans une petite maison avec ma famille.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="language-info-source">
+                      <img src="BusuuIcon.webp" alt="Busuu" class="language-source">
+                      <img src="DuolingoIcon.webp" alt="Duolingo" class="language-source">
+                    </div>
+                  </div>
+                </article>
+                
+                <article class="content-card">
+                  <div class="languages-content">
+                    <div class="language-info-no-source">
+                      <div class="what-language">
+                        <img src="FlagBrasil.webp" alt="flag" class="language-flag">
+                        <h3 class="languages-language-name">Portuguese</h3>
+                      </div>
+                      <div class="languages-info">
+                        <div class="paragraph-section">
+                          <h3 class="languages-title">Most complex text I can read:</h3>
+                          <p class="languages-description">Tenho um cachorro pequeno. Ele corre no parque todos os dias.</p>
+                        </div>
+                        <div class="paragraph-section">
+                          <h3 class="languages-title">One of these words confuses me:</h3>
+                          <p class="languages-description">Gosto de café e pão. Não gosto de peixe.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="language-info-source">
+                      <img src="BusuuIcon.webp" alt="Busuu" class="language-source">
+                      <img src="DuolingoIcon.webp" alt="Duolingo" class="language-source">
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </section>
+          </div>
+        </section>
+      </div>
+    </div>
   </div>
-</body>
+
+  <!-- Message Modal -->
+  <div id="message-modal" class="modal">
+    <div class="modal-content" style="width: 700px; padding: 2rem; border-radius: 1.5rem; background-color: var(--bg-light);">
+      <a href="#" class="modal-close">
+        <img src="CloseIcon.webp" alt="close" class="modal-close-icon">
+      </a>
+      
+      <h2 style="margin-top: 0; margin-bottom: 1.5rem; color: var(--white);">Send me a message</h2>
+      
+      <form id="contactForm"
+            action="https://formsubmit.co/142f1064979ec0292b33d8b183b24c49"
+            method="POST"
+            enctype="multipart/form-data"
+            novalidate
+            aria-describedby="formNote">
+        
+        <div class="form-row">
+          <label for="name">Your name, please</label>
+          <input id="name" name="name" type="text" placeholder="Your name" required minlength="2" maxlength="80" />
+          <div class="error" aria-live="polite" data-for="name"></div>
+        </div>
+
+        <input type="hidden" name="_replyto" value="email" />
+        <div class="form-row">
+          <label for="email">Your email (that's all, no logins)</label>
+          <input id="email" name="email" type="email" placeholder="your@email.com" required />
+          <div class="error" aria-live="polite" data-for="email"></div>
+        </div>
+
+        <div class="form-row">
+          <label for="message">Your message is:</label>
+          <textarea id="message" name="message" placeholder="Tell me what's on your mind..." rows="5" required minlength="6" maxlength="4000"></textarea>
+          <div class="error" aria-live="polite" data-for="message"></div>
+        </div>
+
+        <!-- Honeypot -->
+        <label class="sr-only" for="_honey">Do not fill this, it's a honeypot, but thanks for checking the webtools (perhaps?)</label>
+        <input id="_honey" class="sr-only" name="_honey" type="text" autocomplete="off" />
+
+        <!-- FormSubmit hidden controls -->
+        <input type="hidden" name="_next" value="https://foxdavoid.com/thanks.html" />
+        <input type="hidden" name="_subject" value="New message about foxdavoid.com" />
+        <input type="hidden" name="_template" value="box" />
+        <input type="hidden" name="_autoresponse" value="Can't believe this really works. Anyway, I just wanted to let you know with this automatic response that... I GOT THE MESSAGE. So, good luck, maybe I'll end up reading it. :3" />
+
+        <div style="display: flex; align-items: center; margin-top: 1.5rem;">
+          <button type="submit" id="submitBtn">Send message</button>
+          <div id="status" aria-live="polite"></div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Blogs -->
+  <div id="modal-1" class="modal">
+    <div class="blog-content-container">
+      <div class="blog-content-author">
+        <img src="FoxPfp.webp" alt="pfp" class="blog-content-pfp">
+        <div class="blog-content-author-n-date">
+          <p class="blog-content-name">Fox David</p>
+          <p class="blog-content-date">August 16, 2025</p>
+        </div>
+      </div>
+      <a href="#" class="modal-close">
+        <img src="CloseIcon.webp" alt="close" class="modal-close-icon">
+      </a>
+      <div class="blog-content-content">
+        <div class="content-image">
+          <img src="PostExample.webp" alt="post example" class="blog-content-image">
+        </div>
+        <h2 class="blog-content-title">Man, I'm so tired; I couldn't sleep for days. Don't worry, twin, I got ya</h2>
+        <div class="blog-content-text">
+          <p><b>Lor</b>em <b>ips</b>um <b>dol</b>or <b>sit</b> <b>am</b>et <b>con</b>sectetur <b>adi</b>pisicing <b>el</b>it. <b>Qui</b>squam, <b>quo</b>d.</p>
+          <p><b>Lor</b>em <b>ips</b>um <b>dol</b>or <b>sit</b> <b>am</b>et <b>con</b>sectetur <b>adi</b>pisicing <b>el</b>it. <b>Qui</b>squam, <b>quo</b>d.</p>
+          <p><b>Lor</b>em <b>ips</b>um <b>dol</b>or <b>sit</b> <b>am</b>et <b>con</b>sectetur <b>adi</b>pisicing <b>el</b>it. <b>Qui</b>squam, <b>quo</b>d.</p>
+          <p><b>Lor</b>em <b>ips</b>um <b>dol</b>or <b>sit</b> <b>am</b>et <b>con</b>sectetur <b>adi</b>pisicing <b>el</b>it. <b>Qui</b>squam, <b>quo</b>d.</p>
+          <p><b>Lor</b>em <b>ips</b>um <b>dol</b>or <b>sit</b> <b>am</b>et <b>con</b>sectetur <b>adi</b>pisicing <b>el</b>it. <b>Qui</b>squam, <b>quo</b>d.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  </body>
 </html>
