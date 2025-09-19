@@ -552,7 +552,7 @@ document.addEventListener('DOMContentLoaded', function() {
       } catch (error) {
         if (statusEl) {
           statusEl.className = 'error';
-          statusEl.textContent = "Sorry, your message didn't arrive";
+          statusEl.textContent = "Sorry, something happened";
         }
       } finally {
         if (submitBtn) {
