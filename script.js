@@ -222,21 +222,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Load More Functionality
   function initLoadMore(section) {
-    console.log('Initializing load more for section:', section.className);
     const contentGrid = section.querySelector('.content-grid');
     if (!contentGrid) {
-      console.log('No content grid found in section');
       return;
     }
     if (contentGrid.parentNode.querySelector('.load-more-container')) {
-      console.log('Load more container already exists');
       return;
     }
     
     const cards = Array.from(contentGrid.querySelectorAll('.content-card, .book-card'));
-    console.log('Found cards:', cards.length);
     if (cards.length <= 4) {
-      console.log('Not enough cards to show load more');
       return;
     }
 
@@ -270,9 +265,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     const remainingCards = cards.filter(card => card.classList.contains('hidden'));
-    console.log('Hidden cards:', remainingCards.length);
     if (remainingCards.length === 0) {
-      console.log('No hidden cards to load');
       return;
     }
 
