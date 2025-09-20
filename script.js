@@ -512,7 +512,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       
       try {
-        const response = await fetch('https://formsubmit.co/ajax/b0d32210c94089fee36b97bb34f77064', {
+        const response = await fetch('https://formsubmit.co/ajax/142f1064979ec0292b33d8b183b24c49', {
           method: 'POST',
           body: formData,
           headers: { 'Accept': 'application/json' }
