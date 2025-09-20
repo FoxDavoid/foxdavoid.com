@@ -438,131 +438,168 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(updateCardElements, 1000);
   }
 
-  // Contact Form Handling
+  // Form
   function initContactForm() {
     const form = document.getElementById('contactForm');
     if (!form) return;
     
     const statusEl = document.getElementById('status');
-
+    const submitBtn = form.querySelector('button[type="submit"]');
     const nameInput = form.querySelector('input[name="name"]');
+    const emailInput = form.querySelector('input[name="email"]');
+    const messageInput = form.querySelector('textarea[name="message"]');
+    let isSubmitting = false;
+
     if (nameInput) {
-        nameInput.addEventListener('input', (e) => {
-            if (e.target.value.toLowerCase() === 'gaster') {
-                window.location.reload();
-            }
-        });
+      nameInput.addEventListener('input', (e) => {
+        if (e.target.value.toLowerCase() === 'gaster') {
+          window.location.reload();
+        }
+      });
     }
 
     function setError(field, msg) {
       const el = form.querySelector(`[data-for="${field}"]`);
-      if (el) el.textContent = msg; 
+      if (el) {
+        el.textContent = msg;
+        el.style.display = msg ? 'block' : 'none';
+      }
     }
 
     function clearErrors() {
-      form.querySelectorAll('.error').forEach(e => e.textContent = '');
-      if (statusEl) statusEl.textContent = '';
+      form.querySelectorAll('.error').forEach(e => {
+        e.textContent = '';
+        e.style.display = 'none';
+      });
+      if (statusEl) {
+        statusEl.textContent = '';
+        statusEl.className = '';
+      }
     }
 
-    function clientValidate() {
-      clearErrors();
-      let ok = true;
-      const name = form.name.value.trim();
-
-      if (name.toLowerCase() === 'gaster') {
-        window.location.reload();
-        return false;
-      }
-
-      if (name.length > 0 && name.length < 2) { 
-        setError('name', 'How on Earth do you have less than two characters in your name? Like, BRO?!'); 
-        ok = false; 
-      }
-      if (name.length < 1) { 
-        setError('name', 'So, you don\'t have a name? How did people even refer to you at school? "Null"?'); 
-        ok = false; 
+    function validateField(field, value) {
+      value = value.trim();
+      
+      if (field === 'name') {
+        if (value.length === 0) {
+          return 'So, you don\'t have a name? How did people even refer to you at school? "Null"?';
+        }
+        if (value.length < 2) {
+          return 'How on Earth do you have less than two characters in your name? Like, BRO?!';
+        }
+      } 
+      
+      if (field === 'email') {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (value.length === 0) {
+          return 'Ehem';
+        }
+        if (!emailPattern.test(value)) {
+          return "Nice email, too bad it doesn't exist";
+        }
       }
       
-      const email = form.email.value.trim();
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailPattern.test(email)) { 
-        setError('email', "Nice email, too bad it doesn't exist"); 
-        ok = false; 
+      if (field === 'message') {
+        if (value.length === 0) {
+          return 'Brother, this shit is empty.';
+        }
+        if (value.length < 4 && value.length > 0) {
+          return "This right here is the kind of message that I wouldn't reply to.";
+        }
       }
       
-      const msg = form.message.value.trim();
-      if (msg.length < 4) { 
-        setError('message', "This right here is the kind of message that I wouldn't reply to."); 
-        ok = false; 
-      }
-      
-      if (form._honey && form._honey.value) ok = false;
-      
-      return ok;
+      return '';
     }
 
-    async function ajaxSubmit(e) {
+    function validateForm() {
+      let isValid = true;
+      
+      const nameError = validateField('name', nameInput.value);
+      setError('name', nameError);
+      if (nameError) isValid = false;
+      
+      const emailError = validateField('email', emailInput.value);
+      setError('email', emailError);
+      if (emailError) isValid = false;
+      
+      const messageError = validateField('message', messageInput.value);
+      setError('message', messageError);
+      if (messageError) isValid = false;
+      
+      if (form._honey && form._honey.value) {
+        isValid = false;
+      }
+      
+      return isValid;
+    }
+
+    // InRealTime
+    [nameInput, emailInput, messageInput].forEach(input => {
+      if (input) {
+        input.addEventListener('input', () => {
+          if (isSubmitting) return;
+          validateField(input.name, input.value);
+        });
+        
+        input.addEventListener('blur', () => {
+          if (isSubmitting) return;
+          validateField(input.name, input.value);
+        });
+      }
+    });
+
+    form.addEventListener('submit', function(e) {
       e.preventDefault();
-      if (!clientValidate()) return;
       
-      const formData = new FormData(form);
-      const submitBtn = form.querySelector('button[type="submit"]');
+      if (isSubmitting) return;
       
+      // Last step
+      if (!validateForm()) {
+        if (statusEl) {
+          statusEl.className = 'error';
+        }
+        return;
+      }
+      
+      isSubmitting = true;
       if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending...';
+        submitBtn.textContent = 'Okay...';
       }
       
       if (statusEl) {
         statusEl.className = '';
-        statusEl.textContent = 'Here we go...';
+        statusEl.textContent = 'Come oooooon...';
       }
       
-      try {
-        const response = await fetch('https://formsubmit.co/ajax/142f1064979ec0292b33d8b183b24c49', {
-          method: 'POST',
-          body: formData,
-          headers: { 'Accept': 'application/json' }
-        });
-        
-        const data = await response.json();
-        
-        if (data.success === 'true' || data.success === true) {
-          if (statusEl) {
-            statusEl.className = 'success';
-            statusEl.textContent = 'The message got sent. You can rest.';
-          }
-          form.reset();
-
-          // Close after 2 seconds
-          setTimeout(() => {
-            const modal = form.closest('.modal');
-            if (modal) {
-              modal.classList.remove('active');
-              document.body.style.overflow = '';
-              document.body.style.position = '';
-              document.body.style.top = '';
-              document.body.style.width = '';
-              window.scrollTo(0, scrollPosition);
-            }
-          }, 2000);
-        } else {
-          throw new Error(data.message || 'Something failed, brother');
-        }
-      } catch (error) {
+      const formData = new FormData(form);
+      
+      setTimeout(() => {
         if (statusEl) {
-          statusEl.className = 'error';
-          statusEl.textContent = "Sorry, something happened";
+          statusEl.className = 'success';
+          statusEl.textContent = 'I GOT YOU MESSAGE! Now let me reload the page (I have to)';
         }
-      } finally {
-        if (submitBtn) {
+        
+        setTimeout(() => {
+          form.submit();
+        }, 1500);
+      }, 1000);
+      
+      // In case it went wrong
+      setTimeout(() => {
+        if (submitBtn && !form.wasSubmitted) {
           submitBtn.disabled = false;
           submitBtn.textContent = 'Send message';
+          isSubmitting = false;
+          if (statusEl) {
+            statusEl.className = 'error';
+            statusEl.textContent = 'And... something happened, lol. Sorry.';
+          }
         }
-      }
-    }
-
-    form.addEventListener('submit', ajaxSubmit);
+      }, 10000);
+      
+      form.wasSubmitted = true;
+    });
   }
 
   // Tooltip Event Listeners
