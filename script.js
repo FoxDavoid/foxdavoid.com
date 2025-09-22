@@ -555,22 +555,23 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
 
-function closeModalAndRestoreScroll() {
-  const modal = form.closest('.modal');
-  if (modal) {
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.width = '';
-    window.scrollTo(0, scrollPosition);
-  }
-}
+    function closeModalAndRestoreScroll() {
+      const modal = document.querySelector('.modal.active');
+      if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        window.scrollTo(0, scrollPosition);
+      }
+    }
 
-    const newForm = form.cloneNode(true);
-    form.parentNode.replaceChild(newForm, form);
-    newForm.addEventListener('submit', ajaxSubmit);
-}
+    if (!form.hasAttribute('data-form-initialized')) {
+      form.setAttribute('data-form-initialized', 'true');
+      form.addEventListener('submit', ajaxSubmit);
+    }
+  }
 
   // Tooltip Event Listeners
   if (banner) {
