@@ -532,14 +532,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     
         const text = await response.text();
-        console.log('FormSubmit non-JSON response (body):', text);
     
         if (response.ok) {
-          if (statusEl) { statusEl.className = 'success'; statusEl.textContent = 'The message got sent (non-JSON response).'; }
+          if (statusEl) { statusEl.className = 'success'; statusEl.textContent = 'The message got sent, but JaSON is lazy and didn\'t check it.'; }
           form.reset();
           setTimeout(closeModalAndRestoreScroll, 2000);
         } else {
-          throw new Error('Non-JSON response and non-OK status: ' + response.status);
+          throw new Error('Something happened with JaSON, look: ' + response.status);
         }
       } catch (error) {
         console.error('Form submit error:', error);
