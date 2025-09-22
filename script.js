@@ -534,7 +534,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const text = await response.text();
     
         if (response.ok) {
-          if (statusEl) { statusEl.className = 'success'; statusEl.textContent = 'The message got sent, but JaSON is lazy and didn\'t check it.'; }
+          if (statusEl) { statusEl.className = 'success'; statusEl.textContent = 'The message got sent. You can rest.'; }
           form.reset();
           setTimeout(closeModalAndRestoreScroll, 2000);
         } else {
@@ -566,7 +566,17 @@ function closeModalAndRestoreScroll() {
   }
 }
 
-    form.addEventListener('submit', ajaxSubmit);
+    const newForm = form.cloneNode(true);
+    form.parentNode.replaceChild(newForm, form);
+    newForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (this.getAttribute('data-submitting') !== 'true') {
+        this.setAttribute('data-submitting', 'true');
+        ajaxSubmit(e).finally(() => {
+          this.removeAttribute('data-submitting');
+        });
+      }
+    });
   }
 
   // Tooltip Event Listeners
