@@ -504,54 +504,55 @@ function initContactForm() {
 
   const statusEl = document.getElementById('status');
   const submitBtn = form.querySelector('button[type="submit"]');
+
   let isSubmitting = false;
 
-  async function ajaxSubmit(e) {
-    e.preventDefault();
-    if (isSubmitting) return;
-    if (!clientValidate()) return;
+async function ajaxSubmit(e) {
+  e.preventDefault();
+  if (isSubmitting) return;
+  if (!clientValidate()) return;
 
-    const formData = new FormData(form);
-    const submitBtn = form.querySelector('button[type="submit"]');
-    
-    isSubmitting = true;
-    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; }
-    if (statusEl) { statusEl.className = ''; statusEl.textContent = 'Here we go...'; }
+  isSubmitting = true;
+  if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; }
+  if (statusEl) { statusEl.className = ''; statusEl.textContent = 'Here we go...'; }
 
-    try {
-      const response = await fetch('https://formsubmit.co/ajax/b0d32210c94089fee36b97bb34f77064', {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      });
+  try {
+    const response = await fetch('https://formsubmit.co/ajax/b0d32210c94089fee36b97bb34f77064', {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    });
 
-      const contentType = (response.headers.get('content-type') || '').toLowerCase();
-      if (contentType.includes('application/json')) {
-        const data = await response.json();
-        if (data && (data.success === true || data.success === 'true')) {
-          if (statusEl) { statusEl.className = 'success'; statusEl.textContent = 'The message got sent. You can rest.'; }
-          form.reset();
-          setTimeout(closeModalAndRestoreScroll, 2000);
-        } else {
-          throw new Error(data && data.message ? data.message : 'Form submission failed');
-        }
+    const ct = (response.headers.get('content-type') || '').toLowerCase();
+    if (ct.includes('application/json')) {
+      const data = await response.json();
+      if (data && (data.success === false || data.success === 'false')) {
+        if (statusEl) { statusEl.className = 'error'; statusEl.textContent = data.message || 'Form requires activation. Somebody tell Fox to check the email.'; }
         return;
       }
-
-      const text = await response.text();
-      if (response.ok) {
+      if (data && (data.success === true || data.success === 'true')) {
         if (statusEl) { statusEl.className = 'success'; statusEl.textContent = 'The message got sent. You can rest.'; }
         form.reset();
         setTimeout(closeModalAndRestoreScroll, 2000);
-      } else {
-        throw new Error('Server returned non-OK status: ' + response.status);
+        return;
       }
-    } catch (error) {
-      console.error('Form submit error:', error);
-      if (statusEl) { statusEl.className = 'error'; statusEl.textContent = error.message || 'Sorry, something happened'; }
-    } finally {
-      isSubmitting = false;
-      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Send'; }
+      throw new Error(data && data.message ? data.message : 'Unexpected JSON response');
+    }
+
+    const text = await response.text();
+    if (response.ok) {
+      if (statusEl) { statusEl.className = 'success'; statusEl.textContent = 'The message got sent. You can rest.'; }
+      form.reset();
+      setTimeout(closeModalAndRestoreScroll, 2000);
+    } else {
+      throw new Error('Server returned non-OK status: ' + response.status);
+    }
+  } catch (err) {
+    console.error('Form submit error:', err);
+    if (statusEl) { statusEl.className = 'error'; statusEl.textContent = err.message || 'Sorry, something happened'; }
+  } finally {
+    isSubmitting = false;
+    if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Send'; }
     }
   }
 
@@ -568,9 +569,7 @@ function closeModalAndRestoreScroll() {
   document.body.style.width = '';
   window.scrollTo(0, scrollPosition || 0);
 }
-
-    form.addEventListener('submit', ajaxSubmit);
-  }
+}
 
   // Tooltip Event Listeners
   if (banner) {
