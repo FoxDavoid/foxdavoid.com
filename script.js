@@ -497,63 +497,75 @@ document.addEventListener('DOMContentLoaded', function() {
     async function ajaxSubmit(e) {
       e.preventDefault();
       if (!clientValidate()) return;
-      
+    
       const formData = new FormData(form);
       const submitBtn = form.querySelector('button[type="submit"]');
-      
+    
       if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.textContent = 'Sending...';
       }
-      
       if (statusEl) {
         statusEl.className = '';
         statusEl.textContent = 'Here we go...';
       }
-      
+    
       try {
         const response = await fetch('https://formsubmit.co/ajax/b0d32210c94089fee36b97bb34f77064', {
           method: 'POST',
           body: formData,
           headers: { 'Accept': 'application/json' }
         });
-        
-        const data = await response.json();
-        
-        if (data.success === 'true' || data.success === true) {
-          if (statusEl) {
-            statusEl.className = 'success';
-            statusEl.textContent = 'The message got sent. You can rest.';
+    
+        const contentType = (response.headers.get('content-type') || '').toLowerCase();
+    
+        if (contentType.includes('application/json')) {
+          const data = await response.json();
+          if (data && (data.success === true || data.success === 'true')) {
+            if (statusEl) { statusEl.className = 'success'; statusEl.textContent = 'The message got sent. You can rest.'; }
+            form.reset();
+            setTimeout(closeModalAndRestoreScroll, 2000);
+          } else {
+            throw new Error(data && data.message ? data.message : 'FormSubmit returned JSON... no success flag.');
           }
+          return;
+        }
+    
+        const text = await response.text();
+        console.log('FormSubmit non-JSON response (body):', text);
+    
+        if (response.ok) {
+          if (statusEl) { statusEl.className = 'success'; statusEl.textContent = 'The message got sent (non-JSON response).'; }
           form.reset();
-
-          // Close after 2 seconds
-          setTimeout(() => {
-            const modal = form.closest('.modal');
-            if (modal) {
-              modal.classList.remove('active');
-              document.body.style.overflow = '';
-              document.body.style.position = '';
-              document.body.style.top = '';
-              document.body.style.width = '';
-              window.scrollTo(0, scrollPosition);
-            }
-          }, 2000);
+          setTimeout(closeModalAndRestoreScroll, 2000);
         } else {
-          throw new Error(data.message || 'Something failed, brother');
+          throw new Error('Non-JSON response and non-OK status: ' + response.status);
         }
       } catch (error) {
+        console.error('Form submit error:', error);
         if (statusEl) {
           statusEl.className = 'error';
-          statusEl.textContent = "Sorry, something happened";
+          statusEl.textContent = error.message || 'Sorry, something happened';
         }
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
-          submitBtn.textContent = 'Send message';
+          submitBtn.textContent = 'Send';
         }
       }
     }
+
+function closeModalAndRestoreScroll() {
+  const modal = form.closest('.modal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    window.scrollTo(0, scrollPosition);
+  }
+}
 
     form.addEventListener('submit', ajaxSubmit);
   }
