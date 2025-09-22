@@ -567,8 +567,10 @@ function closeModalAndRestoreScroll() {
   }
 }
 
-    form.addEventListener('submit', ajaxSubmit);
-  }
+    const newForm = form.cloneNode(true);
+    form.parentNode.replaceChild(newForm, form);
+    newForm.addEventListener('submit', ajaxSubmit);
+}
 
   // Tooltip Event Listeners
   if (banner) {
