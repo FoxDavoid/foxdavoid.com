@@ -494,80 +494,63 @@ document.addEventListener('DOMContentLoaded', function() {
       return ok;
     }
 
-let scrollPosition = 0;
+async function ajaxSubmit(e) {
+  e.preventDefault();
+  if (isSubmitting) return;
+  if (!clientValidate()) return;
 
-function initContactForm() {
-  const form = document.getElementById('contactForm');
-  if (!form) return;
-  if (form.dataset.jsInited) return;
-  form.dataset.jsInited = '1';
+  isSubmitting = true;
+  if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; }
+  if (statusEl) { statusEl.className = ''; statusEl.textContent = 'Here we go...'; }
 
-  const statusEl = document.getElementById('status');
-  const submitBtn = form.querySelector('button[type="submit"]');
+  try {
+    const formData = new FormData(form);
+    if (!formData.has('_captcha')) formData.append('_captcha', 'false');
 
-  let isSubmitting = false;
+    const response = await fetch('https://formsubmit.co/ajax/b0d32210c94089fee36b97bb34f77064', {
+      method: 'POST',
+      body: formData
+    });
 
-  async function ajaxSubmit(e) {
-    e.preventDefault();
-    if (isSubmitting) return;
-    if (!clientValidate()) return;
+    const ct = (response.headers.get('content-type') || '').toLowerCase();
 
-    isSubmitting = true;
-    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; }
-    if (statusEl) { statusEl.className = ''; statusEl.textContent = 'Here we go...'; }
-
-    try {
-      const response = await fetch('https://formsubmit.co/ajax/b0d32210c94089fee36b97bb34f77064', {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-      });
-
-      const ct = (response.headers.get('content-type') || '').toLowerCase();
-      if (ct.includes('application/json')) {
-        const data = await response.json();
-        if (data && (data.success === false || data.success === 'false')) {
-          if (statusEl) { statusEl.className = 'error'; statusEl.textContent = data.message || 'Form requires activation. Somebody tell Fox to check the email.'; }
-          return;
-        }
-        if (data && (data.success === true || data.success === 'true')) {
-          if (statusEl) { statusEl.className = 'success'; statusEl.textContent = 'The message got sent. You can rest.'; }
-          form.reset();
-          setTimeout(closeModalAndRestoreScroll, 2000);
-          return;
-        }
-        throw new Error(data && data.message ? data.message : 'Unexpected JSON response');
-      }
-
-      const text = await response.text();
-      if (response.ok) {
-        if (statusEl) { statusEl.className = 'success'; statusEl.textContent = 'The message got sent. You can rest.'; }
-        form.reset();
-        setTimeout(closeModalAndRestoreScroll, 2000);
-      } else {
-        throw new Error('Server returned non-OK status: ' + response.status);
-      }
-    } catch (err) {
-      console.error('Form submit error:', err);
-      if (statusEl) { statusEl.className = 'error'; statusEl.textContent = err.message || 'Sorry, something happened'; }
-    } finally {
-      isSubmitting = false;
-      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Send'; }
+    async function tryParseJson() {
+      try {
+        if (ct.includes('application/json')) return await response.json();
+        const text = await response.text();
+        try { return JSON.parse(text); } catch (e) { return null; }
+      } catch (e) { return null; }
     }
+
+    const data = await tryParseJson();
+
+    if (data && (data.success === false || data.success === 'false')) {
+      if (statusEl) { statusEl.className = 'error'; statusEl.textContent = data.message || 'Form needs activation — Somebody tell Fox to check the email.'; }
+      return;
+    }
+
+    if (data && (data.success === true || data.success === 'true')) {
+      if (statusEl) { statusEl.className = 'success'; statusEl.textContent = 'The message got sent. You can rest.'; }
+      form.reset();
+      setTimeout(closeModalAndRestoreScroll, 2000);
+      return;
+    }
+
+    if (response.ok) {
+      if (statusEl) { statusEl.className = 'success'; statusEl.textContent = 'The message got sent. You can rest.'; }
+      form.reset();
+      setTimeout(closeModalAndRestoreScroll, 2000);
+      return;
+    }
+
+    throw new Error('Unexpected response from server: ' + response.status);
+  } catch (err) {
+    console.error('Form submit error:', err);
+    if (statusEl) { statusEl.className = 'error'; statusEl.textContent = err.message || 'Sorry, something happened'; }
+  } finally {
+    isSubmitting = false;
+    if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Send'; }
   }
-
-  form.addEventListener('submit', ajaxSubmit);
-}
-
-function closeModalAndRestoreScroll() {
-  const form = document.getElementById('contactForm');
-  const modal = form ? form.closest('.modal') : null;
-  if (modal) modal.classList.remove('active');
-  document.body.style.overflow = '';
-  document.body.style.position = '';
-  document.body.style.top = '';
-  document.body.style.width = '';
-  window.scrollTo(0, scrollPosition || 0);
 }
 
     form.addEventListener('submit', ajaxSubmit);
