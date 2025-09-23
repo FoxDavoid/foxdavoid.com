@@ -436,7 +436,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('contactForm');
     if (!form) return;
     
-    const statusEl = document.getElementById('status');
+    const newForm = form.cloneNode(true);
+    form.parentNode.replaceChild(newForm, form);
+    
+    const statusEl = newForm.querySelector('#status');
+    let isSubmitting = false;
 
     const nameInput = form.querySelector('input[name="name"]');
     if (nameInput) {
@@ -496,7 +500,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function ajaxSubmit(e) {
       e.preventDefault();
-      if (!clientValidate()) return;
+      
+      if (isSubmitting) return;
+      isSubmitting = true;
+      
+      if (!clientValidate()) {
+        isSubmitting = false;
+        return;
+      }
     
       const formData = new FormData(form);
       const submitBtn = form.querySelector('button[type="submit"]');
@@ -548,6 +559,7 @@ document.addEventListener('DOMContentLoaded', function() {
           statusEl.textContent = error.message || 'Sorry, something happened';
         }
       } finally {
+        isSubmitting = false;
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.textContent = 'Send';
@@ -567,10 +579,14 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
 
+<<<<<<< Updated upstream
     if (!form.hasAttribute('data-form-initialized')) {
       form.setAttribute('data-form-initialized', 'true');
       form.addEventListener('submit', ajaxSubmit);
     }
+=======
+    newForm.addEventListener('submit', ajaxSubmit);
+>>>>>>> Stashed changes
   }
 
   // Tooltip Event Listeners
