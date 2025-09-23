@@ -566,17 +566,7 @@ function closeModalAndRestoreScroll() {
   }
 }
 
-    const newForm = form.cloneNode(true);
-    form.parentNode.replaceChild(newForm, form);
-    newForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      if (this.getAttribute('data-submitting') !== 'true') {
-        this.setAttribute('data-submitting', 'true');
-        ajaxSubmit(e).finally(() => {
-          this.removeAttribute('data-submitting');
-        });
-      }
-    });
+    form.addEventListener('submit', ajaxSubmit);
   }
 
   // Tooltip Event Listeners
