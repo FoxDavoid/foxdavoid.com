@@ -580,10 +580,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     if (!form.hasAttribute('data-form-initialized')) {
       form.setAttribute('data-form-initialized', 'true');
       form.addEventListener('submit', ajaxSubmit);
     }
+=======
+    newForm.addEventListener('submit', ajaxSubmit);
+>>>>>>> Stashed changes
 =======
     newForm.addEventListener('submit', ajaxSubmit);
 >>>>>>> Stashed changes
