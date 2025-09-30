@@ -7,7 +7,7 @@ tooltip.style.width = '9rem';
 tooltip.style.textAlign = 'center';
 document.body.appendChild(tooltip);
 
-// All hiden at the start
+// All hidden at the start
 document.documentElement.style.visibility = 'hidden';
 
 // Wait for everything to load finally
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function initModals() {
     let scrollPosition = 0;
     
-    document.querySelectorAll('a[href^="#newsletter-"], a[href^="#blog-"], a[href^="#feed-"], a[href^="#changelog-"], a[href^="#modal-"], a[href="#message-modal"]').forEach(link => {
+    document.querySelectorAll('a[href^="#newsletter-"], a[href^="#blog-"], a[href^="#feed-"], a[href^="#changelog-"], a[href^="#modal-"], a[href="#message-modal"], a[href="#subscribe-modal"]').forEach(link => {
       link.addEventListener('click', function(e) {
         e.preventDefault();
         const modal = document.querySelector(this.getAttribute('href'));
@@ -697,4 +697,37 @@ function closeModalAndRestoreScroll() {
 
   // Initialize
   init();
+
+  // Tier selection
+  document.addEventListener('click', function(e) {
+    const tierItem = e.target.closest('.tier-item');
+    if (!tierItem) return;
+
+    const isAlreadyActive = tierItem.classList.contains('active');
+    const tierPack = tierItem.closest('.tier-pack');
+    const formField = tierItem.nextElementSibling;
+
+    document.querySelectorAll('.sender-form-field').forEach(field => {
+      field.style.display = 'none';
+    });
+
+    if (isAlreadyActive) {
+      tierItem.classList.remove('active');
+      if (tierPack) {
+        tierPack.classList.remove('active');
+      }
+    } else {
+      document.querySelectorAll('.tier-item').forEach(item => item.classList.remove('active'));
+      document.querySelectorAll('.tier-pack').forEach(pack => pack.classList.remove('active'));
+      
+      tierItem.classList.add('active');
+      if (tierPack) {
+        tierPack.classList.add('active');
+      }
+      
+      if (formField && formField.classList.contains('sender-form-field')) {
+        formField.style.display = 'block';
+      }
+    }
+  });
 });

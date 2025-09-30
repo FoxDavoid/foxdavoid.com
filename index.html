@@ -36,6 +36,22 @@
   <!-- <meta name="twitter:image" content=""> -->
   <meta name="twitter:site" content="@foxdavoid">
   <meta name="twitter:creator" content="@foxdavoid">
+
+  <!-- Sender.net -->
+  <script>
+    (function (s, e, n, d, er) {
+      s['Sender'] = er;
+      s[er] = s[er] || function () {
+        (s[er].q = s[er].q || []).push(arguments)
+      }, s[er].l = 1 * new Date();
+      var a = e.createElement(n),
+        m = e.getElementsByTagName(n)[0];
+      a.async = 1;
+      a.src = d;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://cdn.sender.net/accounts_resources/universal.js', 'sender');
+    sender('6867a63c7f9436')
+  </script>
 </head>
 <body>
   <div class="page-container">
@@ -70,8 +86,8 @@
               <a href="#message-modal" class="profile-button message-btn">
                 <span class="profile-btn-text" id="MessageAnn">Message</span>
               </a>
-              <a href="#" class="profile-button subscribe-btn">
-                <span class="profile-btn-text" id="SubscribeAnn">Subscribe (nope)</span>
+              <a href="#subscribe-modal" class="profile-button subscribe-btn">
+                <span class="profile-btn-text" id="SubscribeAnn">Subscribe</span>
               </a>
             </div>
           </div>
@@ -325,7 +341,7 @@
                       <div class="tool-stuff-info">
                         <div class="tool-stuff-info-n-description">
                           <h3 class="content-title">Vivaldi</h3>
-                          <p class="content-description">My prefered Internet browser.</p>
+                          <p class="content-description">My preferred Internet browser.</p>
                         </div>
                         <a href="https://vivaldi.com/" class="tool-stuff-interesting-btn" target="_blank" rel="noopener noreferrer" aria-label="Download Vivaldi" title="Download Vivaldi">Interesting...</a>
                       </div>
@@ -525,12 +541,12 @@
 
   <!-- Message Modal -->
   <div id="message-modal" class="modal">
-    <div class="modal-content" style="width: 700px; padding: 2rem; border-radius: 1.5rem; background-color: var(--bg-light);">
+    <div class="modal-content" style="width: 700px; height: 100%; padding: 2rem; border-radius: 1.5rem; background-color: var(--bg-light);">
       <a class="modal-close">
         <img src="CloseIcon.webp" alt="close" class="modal-close-icon">
       </a>
       
-      <h2 style="margin-top: 0; margin-bottom: 1.5rem; color: var(--white);">Send me a message</h2>
+      <h2 style="margin-top: 0; margin-bottom: 1.5rem; color: var(--white);" class="message-modal-title">Send me a message</h2>
       
       <form id="contactForm"
             action="https://formsubmit.co/b0d32210c94089fee36b97bb34f77064"
@@ -539,32 +555,34 @@
             novalidate
             aria-describedby="formNote">
         
-        <div class="form-row">
-          <label for="name">Your name, please</label>
-          <input id="name" name="name" type="text" placeholder="McLovin" required minlength="2" maxlength="80" />
-          <div class="error" aria-live="polite" data-for="name"></div>
+        <div class="form-but-btn">
+          <div class="form-row">
+            <label for="name">Your name, please</label>
+            <input id="name" name="name" type="text" placeholder="McLovin" required minlength="2" maxlength="80" />
+            <div class="error" aria-live="polite" data-for="name"></div>
+          </div>
+  
+          <input type="hidden" name="_replyto" value="email" />
+          <div class="form-row">
+            <label for="email">Your email (that's all, no logins)</label>
+            <input id="email" name="email" type="email" placeholder="viper543210@yahoo.com" required />
+            <div class="error" aria-live="polite" data-for="email"></div>
+          </div>
+  
+          <div class="form-row message-row">
+            <label for="message">Your message is:</label>
+            <textarea id="message" name="message" placeholder="Hey guys, did you know that Vaporeon is a Water-type Pokemon introduced in Generation 1? Vaporeon is number 134 in the National Dex, and a member of the Field egg group. It evolves from Eevee when exposed to a Water Stone. Vaporeon has a base stat total of 525, as do all Eeveelutions, and it has the ability Water Absorb. Vaporeon learns various strong moves, such as Aurora Beam, Surf, and Acid Armor. Vaporeon is a blue Pokemon with a quadruped build, weighing in at 64 pounds and standing 1 meter tall. Vaporeon's design is inspired by dogs, foxes, mermaids, dolphins, and fish. Vaporeon is able to hide in water due to its chemical makeup being similar to water, according to various Pokedex entries. Vaporeon is the only Eeveelution in Generation 1 that is not weak to Ground-type attacks. Many Trainers like Vaporeon for its design, which mixes cool and cute, as well as its good stats and movepool." rows="5" required minlength="6" maxlength="4000"></textarea>
+            <div class="error" aria-live="polite" data-for="message"></div>
+          </div>
+  
+          <!-- Honeypot -->
+          <label class="sr-only" for="_honey">Do not fill this, it's a honeypot, but thanks for checking the webtools (perhaps?)</label>
+          <input id="_honey" class="sr-only" name="_honey" type="text" autocomplete="off" />
+  
+          <!-- FormSubmit hidden controls -->
+          <input type="hidden" name="_subject" value="New message about foxdavoid.com" />
+          <input type="hidden" name="_template" value="box" />
         </div>
-
-        <input type="hidden" name="_replyto" value="email" />
-        <div class="form-row">
-          <label for="email">Your email (that's all, no logins)</label>
-          <input id="email" name="email" type="email" placeholder="viper543210@yahoo.com" required />
-          <div class="error" aria-live="polite" data-for="email"></div>
-        </div>
-
-        <div class="form-row">
-          <label for="message">Your message is:</label>
-          <textarea id="message" name="message" placeholder="Hey guys, did you know that Vaporeon is a Water-type Pokemon introduced in Generation 1? Vaporeon is number 134 in the National Dex, and a member of the Field egg group. It evolves from Eevee when exposed to a Water Stone. Vaporeon has a base stat total of 525, as do all Eeveelutions, and it has the ability Water Absorb. Vaporeon learns various strong moves, such as Aurora Beam, Surf, and Acid Armor. Vaporeon is a blue Pokemon with a quadruped build, weighing in at 64 pounds and standing 1 meter tall. Vaporeon's design is inspired by dogs, foxes, mermaids, dolphins, and fish. Vaporeon is able to hide in water due to its chemical makeup being similar to water, according to various Pokedex entries. Vaporeon is the only Eeveelution in Generation 1 that is not weak to Ground-type attacks. Many Trainers like Vaporeon for its design, which mixes cool and cute, as well as its good stats and movepool." rows="5" required minlength="6" maxlength="4000"></textarea>
-          <div class="error" aria-live="polite" data-for="message"></div>
-        </div>
-
-        <!-- Honeypot -->
-        <label class="sr-only" for="_honey">Do not fill this, it's a honeypot, but thanks for checking the webtools (perhaps?)</label>
-        <input id="_honey" class="sr-only" name="_honey" type="text" autocomplete="off" />
-
-        <!-- FormSubmit hidden controls -->
-        <input type="hidden" name="_subject" value="New message about foxdavoid.com" />
-        <input type="hidden" name="_template" value="box" />
 
         <div style="display: flex; align-items: center; margin-top: 1.5rem;">
           <button type="submit" id="submitBtn">Send</button>
@@ -575,6 +593,234 @@
   </div>
 
   <!-- Modals -->
+  <div id="subscribe-modal" class="modal">
+    <div class="modal-content select-tier-content" style="width: fit-content; padding: 2rem; border-radius: 1.5rem; background-color: var(--bg-light);">
+      <a class="modal-close">
+        <img src="CloseIcon.webp" alt="close" class="modal-close-icon">
+      </a>
+      <h2 class="modal-title select-tier-title">Choose your tier</h2>
+      <div class="tiers">
+        <div class="tier-pack">
+          <div class="tier-item">
+            <div class="tier-dot-space">
+              <div class="tier-dot"></div>
+            </div>
+            <div class="tier-info">
+              <h2 class="content-title tier-title">Tier 1 - Newsletters</h2>
+              <div class="content-bullet-line">
+                <div class="content-bullet-icon-space">
+                  <svg width="49.37" height="68.995" viewBox="0 0 49.37 68.995" fill="none" xmlns="http://www.w3.org/2000/svg" class="content-bullet-icon">
+                    <path
+                      d="M19.6252 63.9952L44.37 41.8102L44.37 20.4785L24.7448 20.4785L24.7448 0L0 23.0383L0 41.8102L19.6252 41.8102L19.6252 63.9952Z"
+                      fill="#777" fill-rule="evenodd" stroke-width="5" stroke="#777" stroke-linecap="round" stroke-linejoin="round"
+                      transform="translate(2.5 2.5)" />
+                  </svg>
+                </div>
+                <p class="content-description tier-description">Subscribe to newsletter emails only.</p>
+              </div>
+              <div class="content-bullet-line">
+                <div class="content-bullet-icon-space">
+                  <svg width="49.37" height="68.995" viewBox="0 0 49.37 68.995" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="content-bullet-icon">
+                    <path
+                      d="M19.6252 63.9952L44.37 41.8102L44.37 20.4785L24.7448 20.4785L24.7448 0L0 23.0383L0 41.8102L19.6252 41.8102L19.6252 63.9952Z"
+                      fill="#777" fill-rule="evenodd" stroke-width="5" stroke="#777" stroke-linecap="round" stroke-linejoin="round"
+                      transform="translate(2.5 2.5)" />
+                  </svg>
+                </div>
+                <p class="content-description tier-description">No other emails will be sent to you all out of nowhere, unless you decide subscribe to more than one tier.</p>
+              </div>
+              <div class="content-bullet-line">
+                <div class="content-bullet-icon-space">
+                  <svg width="49.37" height="68.995" viewBox="0 0 49.37 68.995" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="content-bullet-icon">
+                    <path
+                      d="M19.6252 63.9952L44.37 41.8102L44.37 20.4785L24.7448 20.4785L24.7448 0L0 23.0383L0 41.8102L19.6252 41.8102L19.6252 63.9952Z"
+                      fill="#777" fill-rule="evenodd" stroke-width="5" stroke="#777" stroke-linecap="round" stroke-linejoin="round"
+                      transform="translate(2.5 2.5)" />
+                  </svg>
+                </div>
+                <p class="content-description tier-description">Free, as it should be.</p>
+              </div>
+              <div class="content-bullet-line">
+                <div class="content-bullet-icon-space">
+                  <svg width="49.37" height="68.995" viewBox="0 0 49.37 68.995" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="content-bullet-icon">
+                    <path
+                      d="M19.6252 63.9952L44.37 41.8102L44.37 20.4785L24.7448 20.4785L24.7448 0L0 23.0383L0 41.8102L19.6252 41.8102L19.6252 63.9952Z"
+                      fill="#777" fill-rule="evenodd" stroke-width="5" stroke="#777" stroke-linecap="round" stroke-linejoin="round"
+                      transform="translate(2.5 2.5)" />
+                  </svg>
+                </div>
+                <p class="content-description tier-description">You can cancel anytime.</p>
+              </div>
+              <div class="content-bullet-line">
+                <div class="content-bullet-icon-space">
+                  <svg width="49.37" height="68.995" viewBox="0 0 49.37 68.995" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="content-bullet-icon">
+                    <path
+                      d="M19.6252 63.9952L44.37 41.8102L44.37 20.4785L24.7448 20.4785L24.7448 0L0 23.0383L0 41.8102L19.6252 41.8102L19.6252 63.9952Z"
+                      fill="#777" fill-rule="evenodd" stroke-width="5" stroke="#777" stroke-linecap="round" stroke-linejoin="round"
+                      transform="translate(2.5 2.5)" />
+                  </svg>
+                </div>
+                <p class="content-description tier-description">I won't do anything with your data, seriously, cuz I don't really care.</p>
+              </div>
+            </div>
+          </div>
+          <div style="text-align: left" class="sender-form-field" data-sender-form-id="azp5q2"></div>
+        </div>
+  
+        <div class="tier-pack">
+          <div class="tier-item">
+            <div class="tier-dot-space">
+              <div class="tier-dot"></div>
+            </div>
+            <div class="tier-info">
+              <h2 class="content-title tier-title">Tier 2 - Blogs</h2>
+              <div class="content-bullet-line">
+                <div class="content-bullet-icon-space">
+                  <svg width="49.37" height="68.995" viewBox="0 0 49.37 68.995" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="content-bullet-icon">
+                    <path
+                      d="M19.6252 63.9952L44.37 41.8102L44.37 20.4785L24.7448 20.4785L24.7448 0L0 23.0383L0 41.8102L19.6252 41.8102L19.6252 63.9952Z"
+                      fill="#777" fill-rule="evenodd" stroke-width="5" stroke="#777" stroke-linecap="round" stroke-linejoin="round"
+                      transform="translate(2.5 2.5)" />
+                  </svg>
+                </div>
+                <p class="content-description tier-description">Subscribe to blog emails only.</p>
+              </div>
+              <div class="content-bullet-line">
+                <div class="content-bullet-icon-space">
+                  <svg width="49.37" height="68.995" viewBox="0 0 49.37 68.995" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="content-bullet-icon">
+                    <path
+                      d="M19.6252 63.9952L44.37 41.8102L44.37 20.4785L24.7448 20.4785L24.7448 0L0 23.0383L0 41.8102L19.6252 41.8102L19.6252 63.9952Z"
+                      fill="#777" fill-rule="evenodd" stroke-width="5" stroke="#777" stroke-linecap="round" stroke-linejoin="round"
+                      transform="translate(2.5 2.5)" />
+                  </svg>
+                </div>
+                <p class="content-description tier-description">No other emails will be sent to you all out of nowhere, unless you decide subscribe to more than one tier.</p>
+              </div>
+              <div class="content-bullet-line">
+                <div class="content-bullet-icon-space">
+                  <svg width="49.37" height="68.995" viewBox="0 0 49.37 68.995" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="content-bullet-icon">
+                    <path
+                      d="M19.6252 63.9952L44.37 41.8102L44.37 20.4785L24.7448 20.4785L24.7448 0L0 23.0383L0 41.8102L19.6252 41.8102L19.6252 63.9952Z"
+                      fill="#777" fill-rule="evenodd" stroke-width="5" stroke="#777" stroke-linecap="round" stroke-linejoin="round"
+                      transform="translate(2.5 2.5)" />
+                  </svg>
+                </div>
+                <p class="content-description tier-description">Free, as it should be.</p>
+              </div>
+              <div class="content-bullet-line">
+                <div class="content-bullet-icon-space">
+                  <svg width="49.37" height="68.995" viewBox="0 0 49.37 68.995" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="content-bullet-icon">
+                    <path
+                      d="M19.6252 63.9952L44.37 41.8102L44.37 20.4785L24.7448 20.4785L24.7448 0L0 23.0383L0 41.8102L19.6252 41.8102L19.6252 63.9952Z"
+                      fill="#777" fill-rule="evenodd" stroke-width="5" stroke="#777" stroke-linecap="round" stroke-linejoin="round"
+                      transform="translate(2.5 2.5)" />
+                  </svg>
+                </div>
+                <p class="content-description tier-description">You can cancel anytime.</p>
+              </div>
+              <div class="content-bullet-line">
+                <div class="content-bullet-icon-space">
+                  <svg width="49.37" height="68.995" viewBox="0 0 49.37 68.995" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="content-bullet-icon">
+                    <path
+                      d="M19.6252 63.9952L44.37 41.8102L44.37 20.4785L24.7448 20.4785L24.7448 0L0 23.0383L0 41.8102L19.6252 41.8102L19.6252 63.9952Z"
+                      fill="#777" fill-rule="evenodd" stroke-width="5" stroke="#777" stroke-linecap="round" stroke-linejoin="round"
+                      transform="translate(2.5 2.5)" />
+                  </svg>
+                </div>
+                <p class="content-description tier-description">I won't do anything with your data, seriously, cuz I don't really
+                  care.</p>
+              </div>
+            </div>
+          </div>
+          <div style="text-align: left" class="sender-form-field" data-sender-form-id="aADo8j"></div>
+        </div>
+  
+        <div class="tier-pack">
+          <div class="tier-item">
+            <div class="tier-dot-space">
+              <div class="tier-dot"></div>
+            </div>
+            <div class="tier-info">
+              <h2 class="content-title tier-title">Tier 3 - Feed</h2>
+              <div class="content-bullet-line">
+                <div class="content-bullet-icon-space">
+                  <svg width="49.37" height="68.995" viewBox="0 0 49.37 68.995" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="content-bullet-icon">
+                    <path
+                      d="M19.6252 63.9952L44.37 41.8102L44.37 20.4785L24.7448 20.4785L24.7448 0L0 23.0383L0 41.8102L19.6252 41.8102L19.6252 63.9952Z"
+                      fill="#777" fill-rule="evenodd" stroke-width="5" stroke="#777" stroke-linecap="round" stroke-linejoin="round"
+                      transform="translate(2.5 2.5)" />
+                  </svg>
+                </div>
+                <p class="content-description tier-description">Subscribe to feed emails only.</p>
+              </div>
+              <div class="content-bullet-line">
+                <div class="content-bullet-icon-space">
+                  <svg width="49.37" height="68.995" viewBox="0 0 49.37 68.995" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="content-bullet-icon">
+                    <path
+                      d="M19.6252 63.9952L44.37 41.8102L44.37 20.4785L24.7448 20.4785L24.7448 0L0 23.0383L0 41.8102L19.6252 41.8102L19.6252 63.9952Z"
+                      fill="#777" fill-rule="evenodd" stroke-width="5" stroke="#777" stroke-linecap="round" stroke-linejoin="round"
+                      transform="translate(2.5 2.5)" />
+                  </svg>
+                </div>
+                <p class="content-description tier-description">No other emails will be sent to you all out of nowhere, unless you decide subscribe to more than one tier.</p>
+              </div>
+              <div class="content-bullet-line">
+                <div class="content-bullet-icon-space">
+                  <svg width="49.37" height="68.995" viewBox="0 0 49.37 68.995" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="content-bullet-icon">
+                    <path
+                      d="M19.6252 63.9952L44.37 41.8102L44.37 20.4785L24.7448 20.4785L24.7448 0L0 23.0383L0 41.8102L19.6252 41.8102L19.6252 63.9952Z"
+                      fill="#777" fill-rule="evenodd" stroke-width="5" stroke="#777" stroke-linecap="round" stroke-linejoin="round"
+                      transform="translate(2.5 2.5)" />
+                  </svg>
+                </div>
+                <p class="content-description tier-description">Free, as it should be.</p>
+              </div>
+              <div class="content-bullet-line">
+                <div class="content-bullet-icon-space">
+                  <svg width="49.37" height="68.995" viewBox="0 0 49.37 68.995" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="content-bullet-icon">
+                    <path
+                      d="M19.6252 63.9952L44.37 41.8102L44.37 20.4785L24.7448 20.4785L24.7448 0L0 23.0383L0 41.8102L19.6252 41.8102L19.6252 63.9952Z"
+                      fill="#777" fill-rule="evenodd" stroke-width="5" stroke="#777" stroke-linecap="round" stroke-linejoin="round"
+                      transform="translate(2.5 2.5)" />
+                  </svg>
+                </div>
+                <p class="content-description tier-description">You can cancel anytime.</p>
+              </div>
+              <div class="content-bullet-line">
+                <div class="content-bullet-icon-space">
+                  <svg width="49.37" height="68.995" viewBox="0 0 49.37 68.995" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="content-bullet-icon">
+                    <path
+                      d="M19.6252 63.9952L44.37 41.8102L44.37 20.4785L24.7448 20.4785L24.7448 0L0 23.0383L0 41.8102L19.6252 41.8102L19.6252 63.9952Z"
+                      fill="#777" fill-rule="evenodd" stroke-width="5" stroke="#777" stroke-linecap="round" stroke-linejoin="round"
+                      transform="translate(2.5 2.5)" />
+                  </svg>
+                </div>
+                <p class="content-description tier-description">I won't do anything with your data, seriously, cuz I don't really
+                  care.</p>
+              </div>
+            </div>
+          </div>
+          <div style="text-align: left" class="sender-form-field" data-sender-form-id="dBBpRo"></div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
   <!-- Newsletters -->
   <!-- I'll change this later -->
   <div id="newsletter-1" class="modal">
@@ -601,6 +847,10 @@
           <p><b>If</b> <b>yo</b>u <b>did</b>n't <b>not</b>ice, I <b>bou</b>ght it <b>on</b> <b>Sep</b>tember 15th, <b>in</b> 2025, <b>whi</b>ch is <b>the</b> 10th <b>ann</b>iversary <b>of</b> <b>UND</b>ERTALE, MY <b>FAV</b>ORITE <b>GAM</b>E <b>EVE</b>R (or <b>wi</b>ll <b>be</b> <b>so</b> <b>unt</b>il <b>Del</b>tarune is <b>fin</b>ished). I <b>tho</b>ught it <b>wa</b>s <b>the</b> <b>rig</b>ht <b>tim</b>e <b>to</b> <b>do</b> it, <b>an</b>d <b>no</b>w <b>tha</b>t I <b>ret</b>hink <b>abo</b>ut it, it <b>wi</b>ll <b>be</b> <b>so</b> <b>fun</b>ny <b>tha</b>t I'l<b>l</b> <b>be</b> <b>lik</b>e "<b>Oh</b>, <b>coo</b>l, <b>Und</b>ertale's <b>bir</b>thday <b>aga</b>in, <b>whi</b>ch <b>mea</b>ns... <b>OH</b>, <b>WAI</b>T, I <b>HAV</b>E <b>TO</b> <b>PA</b>Y <b>TH</b>E <b>DOM</b>AIN" <b>lik</b>e, <b>thi</b>s <b>wi</b>ll <b>be</b> <b>rea</b>l; <b>di</b>d I <b>jus</b>t <b>ins</b>tall <b>an</b> <b>int</b>ernal <b>rem</b>inder <b>tha</b>t <b>wi</b>ll <b>las</b>t <b>as</b> <b>lon</b>g <b>as</b> <b>the</b> <b>web</b>page <b>doe</b>s? <b>Lik</b>e, <b>dam</b>n.</p>
           <p><b>Any</b>ways, <b>tha</b>t's <b>al</b>l. <b>By</b>e. :3</p>
         </div>
+        <div class="blog-content-subscribe-div">
+          <h3 class="get-notified-label">Get an email for every time I add a new one of these</h3>
+          <div style="text-align: left" class="sender-form-field blog-post-subscribe-form" data-sender-form-id="bDkrJk"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -626,6 +876,10 @@
         <div class="blog-content-text">
           <p><b>Th</b>is <b>rig</b>ht <b>he</b>re <b>is</b> <b>th</b>e <b>fir</b>st <b>po</b>st <b>fo</b>r <b>foxd</b>avoid.com (<b>we</b>ll, I <b>hav</b>en't <b>bou</b>ght <b>the</b> <b>dom</b>ain, <b>bu</b>t <b>tha</b>t's <b>how</b> I <b>cal</b>led <b>the</b> <b>Git</b>Hub <b>re</b>po <b>li</b>ke).</p> <p><b>Wh</b>at <b>is</b> <b>th</b>is <b>foo</b>or?</p> <p><b>We</b>ll, I <b>cer</b>tainly <b>don</b>'t <b>kn</b>ow, <b>haha</b>ahahahahahahah. <b>No</b>, <b>rea</b>lly, I <b>nee</b>d <b>to</b> <b>thi</b>nk <b>abo</b>ut <b>it</b>. <b>Th</b>is <b>was</b> <b>som</b>ething I <b>tho</b>ught <b>it</b> <b>wou</b>ld <b>be</b> <b>coo</b>l <b>fo</b>r my <b>bir</b>thday. <b>A</b> <b>bir</b>th-day, <b>cu</b>z... <b>ye</b>ah, <b>the</b> <b>web</b>page <b>was</b> <b>bor</b>n, <b>mea</b>ning <b>as</b> <b>we</b>ll <b>tha</b>t <b>thi</b>s <b>web</b>page <b>mig</b>ht <b>cel</b>ebrate <b>its</b> <b>bir</b>thday <b>at</b> <b>the</b> <b>sam</b>e <b>tim</b>e I <b>do</b> (or <b>do</b>n't), <b>lo</b>l.</p> <p><b>So</b>, <b>wh</b>at <b>wil</b>l <b>th</b>is <b>blo</b>g <b>be</b> <b>abo</b>ut? <b>I'</b>m <b>not</b> <b>ent</b>irely <b>sur</b>e <b>yet</b>, <b>bu</b>t I <b>env</b>ision <b>it</b> <b>as</b> <b>a</b> <b>pla</b>ce <b>to</b> <b>sha</b>re my <b>tho</b>ughts, <b>pro</b>jects, <b>and</b> <b>per</b>haps <b>som</b>e <b>tur</b>orials <b>on</b> <b>top</b>ics I'm <b>pas</b>sionate <b>abo</b>ut. <b>It'</b>s <b>a</b> <b>spa</b>ce <b>fo</b>r me <b>to</b> <b>doc</b>ument my <b>jou</b>rney <b>and</b> <b>con</b>nect <b>wit</b>h <b>oth</b>ers <b>who</b> <b>sha</b>re <b>sim</b>ilar <b>int</b>erests.</p> <p><b>I</b> <b>wis</b>h <b>th</b>is <b>art</b>icle <b>was</b> <b>mor</b>e <b>lik</b>e <b>a</b> <b>new</b>sletter, <b>haha</b>h, <b>bu</b>t <b>th</b>is <b>is</b> <b>the</b> <b>fir</b>st <b>one</b> <b>so</b> I <b>don</b>'t <b>rea</b>lly <b>hav</b>e <b>som</b>ething <b>to</b>... <b>ann</b>ounce <b>bes</b>ides <b>th</b>is <b>tin</b>y <b>sil</b>ly <b>pro</b>ject. <b>It'</b>s <b>jus</b>t <b>a</b> <b>pag</b>e.</p> <p><b>If</b> <b>yo</b>u <b>fee</b>l <b>fat</b>igued <b>by</b> <b>jus</b>t <b>rea</b>ding <b>th</b>is, <b>I'</b>m <b>rea</b>lly <b>sor</b>ry <b>fo</b>r <b>yo</b>u, <b>cu</b>z <b>th</b>is <b>is</b> <b>pro</b>bably <b>one</b> <b>of</b> <b>the</b> <b>sho</b>rtest <b>pos</b>ts <b>eve</b>r <b>tha</b>t <b>wil</b>l <b>be</b> <b>her</b>e. <b>Li</b>ke, <b>rea</b>lly, I'<b>m</b> <b>not</b> <b>kid</b>ding. <b>Yo</b>u <b>hav</b>e <b>any</b> <b>ide</b>a <b>how</b> <b>man</b>y <b>tim</b>es I <b>can</b>'t <b>fre</b>ely <b>tal</b>k <b>abo</b>ut <b>lit</b>erally <b>ANY</b>THING? <b>Th</b>is <b>thi</b>ng <b>mig</b>ht <b>be</b> my <b>out</b>let. <b>The</b>re <b>ar</b>e <b>som</b>e <b>tim</b>es my <b>tho</b>ughts <b>get</b> <b>ove</b>r me <b>and</b> I <b>jus</b>t <b>sta</b>rt <b>say</b>ing <b>ran</b>dom <b>stu</b>ff I <b>cer</b>tainly <b>alw</b>ays <b>thi</b>nk <b>abo</b>ut ( <b>we</b>ll, <b>not</b> <b>LIT</b>ERALLY <b>ALW</b>AYS) <b>bu</b>t <b>yo</b>u <b>get</b> <b>the</b> <b>poi</b>nt, I <b>hop</b>e.</p> <p><b>And</b> <b>maa</b>ybe <b>it</b> <b>won</b>'t <b>be</b> <b>jus</b>t <b>tho</b>ughts <b>and</b> <b>tho</b>ughts <b>one</b> <b>aft</b>er <b>the</b> <b>ano</b>ther, <b>may</b>be... <b>uh</b>... <b>we</b>ll, I <b>hav</b>en't <b>got</b>ten <b>thi</b>s <b>far</b> <b>bef</b>ore <b>wh</b>en <b>thi</b>nking <b>abo</b>ut <b>th</b>is <b>web</b>page. <b>The</b>re <b>ar</b>e <b>som</b>e <b>sec</b>tions <b>tha</b>t <b>yo</b>u <b>wil</b>l <b>not</b>ice <b>per</b>fectly <b>at</b> <b>fir</b>st <b>gla</b>nce, <b>cu</b>z <b>the</b>y <b>wer</b>e <b>lit</b>erally <b>on</b> <b>yo</b>ur <b>scr</b>een <b>bef</b>ore <b>eve</b>n <b>cli</b>cking <b>th</b>is <b>one</b> (or <b>tap</b>ping? <b>Wa</b>it, <b>ar</b>e <b>yo</b>u <b>on</b> <b>pho</b>ne?).</p> <p><b>New</b>sletters, <b>a</b> <b>che</b>ap <b>one</b>, <b>lik</b>e, I <b>don</b>'t <b>eve</b>n <b>hav</b>e <b>a</b> <b>ema</b>iling <b>ser</b>vice <b>fo</b>r <b>it</b>, <b>haha</b>hahaha... <b>ha</b>... <b>it'</b>s <b>bec</b>ause <b>the</b>re <b>ar</b>e <b>so</b> <b>man</b>y <b>alt</b>ernatives, <b>and</b> I <b>hav</b>en't <b>eve</b>n <b>bou</b>ght <b>the</b> <b>dom</b>ain <b>yet</b> (I <b>don</b>'t <b>eve</b>n <b>kno</b>w <b>eit</b>her <b>I'</b>ll <b>buy</b> <b>it</b> <b>or</b> <b>may</b>be I <b>wil</b>l <b>nex</b>t <b>yea</b>r <b>as</b> <b>a</b> "<b>bir</b>thday <b>gif</b>t" <b>fo</b>r <b>the</b> <b>web</b>page).</p> <p><b>Blo</b>g. <b>Yo</b>u <b>ar</b>e <b>rea</b>ding <b>one</b> <b>at</b> <b>th</b>is <b>mom</b>ent. <b>Ye</b>ah, I <b>sa</b>id <b>th</b>is <b>was</b> <b>a</b> <b>new</b>sletter, <b>bu</b>t I <b>jus</b>t <b>fou</b>nd <b>out</b> <b>th</b>at <b>jud</b>ging <b>by</b> <b>how</b> I <b>am</b> <b>wri</b>ting <b>all</b> <b>th</b>is, <b>yo</b>u <b>can</b> <b>per</b>fectly <b>tel</b>l <b>th</b>is <b>is</b> <b>not</b> <b>rea</b>lly <b>a</b>... <b>new</b>sletter, <b>we</b>ll, <b>may</b>be, <b>idk</b>.</p> <p><b>Fee</b>d. <b>He</b>re I <b>thi</b>nk I <b>wil</b>l <b>pos</b>t <b>ran</b>dom, <b>qui</b>ck <b>stu</b>ff, <b>lik</b>e <b>ima</b>gine <b>an</b> <b>ave</b>rage <b>per</b>son <b>usi</b>ng <b>Ins</b>tagram <b>on</b> <b>the</b>ir <b>dai</b>ly-basis, <b>we</b>ll, I <b>don</b>'t <b>use</b> <b>Ins</b>tagram, <b>so</b> <b>tha</b>t's <b>up</b> <b>to</b> <b>yo</b>u. <b>Ok</b>ay, <b>no</b>, I <b>do</b> <b>hav</b>e <b>an</b> <b>Ins</b>tagram, <b>bu</b>t <b>to</b> <b>be</b> <b>fai</b>r, I <b>on</b>ly <b>use</b> <b>it</b> <b>to</b> <b>tex</b>t <b>a</b> <b>fri</b>end I <b>sha</b>re <b>thi</b>ngs <b>in</b> <b>com</b>mon ( <b>it'</b>s <b>the</b> <b>one</b> <b>who</b>se <b>dra</b>wing I'<b>m</b> <b>usi</b>ng <b>rig</b>ht <b>now</b> <b>as</b> <b>a</b> "<b>ban</b>ner").</p> <p><b>I'</b>ll <b>won</b>'t <b>exp</b>lain <b>the</b> <b>res</b>t, <b>yo</b>u <b>can</b> <b>lit</b>erally <b>see</b> <b>wh</b>at <b>it</b> <b>is</b> <b>abo</b>ut. <b>Or</b> <b>may</b>be I <b>wil</b>l, <b>bu</b>t <b>in</b> <b>the</b> <b>fut</b>ure, <b>th</b>is <b>is</b> <b>jus</b>t <b>a</b> <b>lit</b>tle <b>thi</b>ng I <b>nee</b>ded <b>to</b> <b>wri</b>te <b>fo</b>r <b>the</b> <b>web</b>site <b>to</b> <b>exi</b>st.</p>
         </div>
+        <div class="blog-content-subscribe-div">
+          <h3 class="get-notified-label">Get an email for every time I add a new one of these</h3>
+          <div style="text-align: left" class="sender-form-field blog-post-subscribe-form" data-sender-form-id="eERv6l"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -647,12 +901,21 @@
         <div class="content-image">
           <img src="Feed1.webp" alt="post example" class="blog-content-image">
         </div>
-        <div class="blog-content-text">
-          <p><b>All</b> I <b>hav</b>e to <b>sho</b>w <b>her</b>e is <b>the</b> <b>ori</b>ginal <b>des</b>ign <b>for</b> the <b>web</b>page</p>
+        <div class="blog-content-text blog-feed-text">
+          <p><b>All</b> I <b>hav</b>e to <b>sho</b>w <b>her</b>e is <b>the</b> <b>ori</b>ginal <b>des</b>ign <b>for</b> the <b>web</b>page.</p>
+        </div>
+        <div class="blog-content-subscribe-div">
+          <h3 class="get-notified-label">Get an email for every time I add a new one of these</h3>
+          <div style="text-align: left" class="sender-form-field blog-post-subscribe-form" data-sender-form-id="dG6xQ5"></div>
         </div>
       </div>
     </div>
   </div>
   <script src="script.js"></script>
+  <script>
+    document.getElementById('tier-item').addEventListener('click', () => {
+      document.body.classList.toggle('active');
+    });
+  </script>
 </body>
 </html>
