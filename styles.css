@@ -1521,6 +1521,32 @@ button[type="submit"]:hover {
   .moderating-join-btn-text {
     font-size: 1rem;
   }
+  .moderating-description-container {
+    flex-direction: column;
+  }
+  .moderating-description {
+    margin-right: 0;
+    text-align: center;
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  .moderating-join-btn {
+    align-self: center;
+    width: 100%;
+    height: 3rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5rem;
+    gap: 0.5rem;
+  }
+  .join-icon {
+    height: 1.2rem;
+    width: 1.2rem;
+  }
+  .moderating-join-btn-text {
+    font-size: 1.2rem;
+  }
 
   .tool-stuff-content { padding: 1rem; align-items: center; justify-content: center; }
 
