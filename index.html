@@ -547,14 +547,9 @@
       </a>
       
       <h2 style="margin-top: 0; margin-bottom: 1.5rem; color: var(--white);" class="message-modal-title">Send me a message</h2>
-      
-      <form id="contactForm"
-            action="https://formsubmit.co/b0d32210c94089fee36b97bb34f77064"
-            method="POST"
-            enctype="multipart/form-data"
-            novalidate
-            aria-describedby="formNote">
-        
+  
+      <form id="contactForm" action="https://submify.vercel.app/me@foxdavoid.com" method="POST" enctype="multipart/form-data" novalidate aria-describedby="formNote">
+  
         <div class="form-but-btn">
           <div class="form-row">
             <label for="name">Your name, please</label>
@@ -578,10 +573,8 @@
           <!-- Honeypot -->
           <label class="sr-only" for="_honey">Do not fill this, it's a honeypot, but thanks for checking the webtools (perhaps?)</label>
           <input id="_honey" class="sr-only" name="_honey" type="text" autocomplete="off" />
-  
-          <!-- FormSubmit hidden controls -->
+
           <input type="hidden" name="_subject" value="New message about foxdavoid.com" />
-          <input type="hidden" name="_template" value="box" />
         </div>
 
         <div style="display: flex; align-items: center; margin-top: 1.5rem;">

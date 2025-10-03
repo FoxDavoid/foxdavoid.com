@@ -431,143 +431,135 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(updateCardElements, 1000);
   }
 
-  // Contact Form Handling
-  function initContactForm() {
-    const form = document.getElementById('contactForm');
-    if (!form) return;
-    
-    const statusEl = document.getElementById('status');
+// Contact Form Handling
+function initContactForm() {
+  const form = document.getElementById('contactForm');
+  if (!form) return;
 
-    const nameInput = form.querySelector('input[name="name"]');
-    if (nameInput) {
-        nameInput.addEventListener('input', (e) => {
-            if (e.target.value.toLowerCase() === 'gaster') {
-                window.location.reload();
-            }
-        });
-    }
+  const statusEl = document.getElementById('status');
+  const scrollPosition = 0;
 
-    function setError(field, msg) {
-      const el = form.querySelector(`[data-for="${field}"]`);
-      if (el) el.textContent = msg; 
-    }
-
-    function clearErrors() {
-      form.querySelectorAll('.error').forEach(e => e.textContent = '');
-      if (statusEl) statusEl.textContent = '';
-    }
-
-    function clientValidate() {
-      clearErrors();
-      let ok = true;
-      const name = form.name.value.trim();
-
-      if (name.toLowerCase() === 'gaster') {
+  const nameInput = form.querySelector('input[name="name"]');
+  if (nameInput) {
+    nameInput.addEventListener('input', (e) => {
+      if (e.target.value.toLowerCase() === 'gaster') {
         window.location.reload();
-        return false;
       }
-
-      if (name.length > 0 && name.length < 2) { 
-        setError('name', 'How on Earth do you have less than two characters in your name? Like, BRO?!'); 
-        ok = false; 
-      }
-      if (name.length < 1) { 
-        setError('name', 'So, you don\'t have a name? How did people even refer to you at school? "Null"?'); 
-        ok = false; 
-      }
-      
-      const email = form.email.value.trim();
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailPattern.test(email)) { 
-        setError('email', "Nice email, too bad it doesn't exist"); 
-        ok = false; 
-      }
-      
-      const msg = form.message.value.trim();
-      if (msg.length < 4) { 
-        setError('message', "This right here is the kind of message that I wouldn't reply to."); 
-        ok = false; 
-      }
-      
-      if (form._honey && form._honey.value) ok = false;
-      
-      return ok;
-    }
-
-    async function ajaxSubmit(e) {
-      e.preventDefault();
-      if (!clientValidate()) return;
-    
-      const formData = new FormData(form);
-      const submitBtn = form.querySelector('button[type="submit"]');
-    
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending...';
-      }
-      if (statusEl) {
-        statusEl.className = '';
-        statusEl.textContent = 'Here we go...';
-      }
-    
-      try {
-        const response = await fetch('https://formsubmit.co/ajax/b0d32210c94089fee36b97bb34f77064', {
-          method: 'POST',
-          body: formData,
-          headers: { 'Accept': 'application/json' }
-        });
-    
-        const contentType = (response.headers.get('content-type') || '').toLowerCase();
-    
-        if (contentType.includes('application/json')) {
-          const data = await response.json();
-          if (data && (data.success === true || data.success === 'true')) {
-            if (statusEl) { statusEl.className = 'success'; statusEl.textContent = 'The message got sent. You can rest.'; }
-            form.reset();
-            setTimeout(closeModalAndRestoreScroll, 2000);
-          } else {
-            throw new Error(data && data.message ? data.message : 'FormSubmit returned JSON... no success flag.');
-          }
-          return;
-        }
-    
-        const text = await response.text();
-    
-        if (response.ok) {
-          if (statusEl) { statusEl.className = 'success'; statusEl.textContent = 'The message got sent. You can rest.'; }
-          form.reset();
-          setTimeout(closeModalAndRestoreScroll, 2000);
-        } else {
-          throw new Error('Something happened with JaSON, look: ' + response.status);
-        }
-      } catch (error) {
-        console.error('Form submit error:', error);
-        if (statusEl) {
-          statusEl.className = 'error';
-          statusEl.textContent = error.message || 'Sorry, something happened';
-        }
-      } finally {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Send';
-        }
-      }
-    }
-
-function closeModalAndRestoreScroll() {
-  const modal = form.closest('.modal');
-  if (modal) {
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.width = '';
-    window.scrollTo(0, scrollPosition);
+    });
   }
+
+  function setError(field, msg) {
+    const el = form.querySelector(`[data-for="${field}"]`);
+    if (el) el.textContent = msg;
+  }
+
+  function clearErrors() {
+    form.querySelectorAll('.error').forEach(e => e.textContent = '');
+    if (statusEl) statusEl.textContent = '';
+  }
+
+  function clientValidate() {
+    clearErrors();
+    let ok = true;
+    const name = (form.name.value || '').trim();
+
+    if (name.toLowerCase() === 'gaster') {
+      window.location.reload();
+      return false;
+    }
+
+    if (name.length > 0 && name.length < 2) {
+      setError('name', 'How on Earth do you have less than two characters in your name? Like, BRO?!');
+      ok = false;
+    }
+    if (name.length < 1) {
+      setError('name', "So, you don't have a name? How did people even refer to you at school? \"Null\"?");
+      ok = false;
+    }
+
+    const email = (form.email.value || '').trim();
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      setError('email', "Nice email, too bad it doesn't exist");
+      ok = false;
+    }
+
+    const msg = (form.message.value || '').trim();
+    if (msg.length < 4) {
+      setError('message', "This right here is the kind of message that I wouldn't reply to.");
+      ok = false;
+    }
+
+    if (form._honey && form._honey.value) ok = false;
+
+    return ok;
+  }
+
+  async function ajaxSubmit(e) {
+    e.preventDefault();
+    if (!clientValidate()) return;
+
+    const formData = new FormData(form);
+    const submitBtn = form.querySelector('button[type="submit"]');
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+    }
+    if (statusEl) {
+      statusEl.className = '';
+      statusEl.textContent = 'Here we go...';
+    }
+
+    try {
+
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors'
+      });
+      if (statusEl) {
+        statusEl.className = 'success';
+        statusEl.textContent = 'The message got sent. You can rest.';
+      }
+      form.reset();
+      setTimeout(closeModalAndRestoreScroll, 1500);
+    
+    } catch (error) {
+      console.error('Form submit error:', error);
+      if (statusEl) {
+        statusEl.className = 'error';
+        statusEl.textContent = error.message || 'Sorry, something happened';
+      }
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send';
+      }
+    }
+  }
+
+  function closeModalAndRestoreScroll() {
+    const modal = form.closest('.modal');
+    if (modal) {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      window.scrollTo(0, scrollPosition);
+    }
+  }
+
+  form.addEventListener('submit', ajaxSubmit);
 }
 
-    form.addEventListener('submit', ajaxSubmit);
-  }
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initContactForm);
+} else {
+  initContactForm();
+}
+
 
   // Tooltip Event Listeners
   if (banner) {
