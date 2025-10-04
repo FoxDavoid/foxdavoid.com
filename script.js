@@ -97,7 +97,8 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('a[href^="#newsletter-"], a[href^="#blog-"], a[href^="#feed-"], a[href^="#changelog-"], a[href^="#modal-"], a[href="#message-modal"], a[href="#subscribe-modal"]').forEach(link => {
       link.addEventListener('click', function(e) {
         e.preventDefault();
-        const modal = document.querySelector(this.getAttribute('href'));
+        const targetHash = this.getAttribute('href');
+        const modal = document.querySelector(targetHash);
         if (modal) {
           scrollPosition = window.pageYOffset;
           modal.classList.add('active');
@@ -105,6 +106,8 @@ document.addEventListener('DOMContentLoaded', function() {
           document.body.style.position = 'fixed';
           document.body.style.top = `-${scrollPosition}px`;
           document.body.style.width = '100%';
+
+          history.pushState(null, null, targetHash);
         }
       });
     });
